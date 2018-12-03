@@ -161,12 +161,12 @@ h1 {
 
 #status-bar {
 	display: flex;
-/*	justify-content: center;
-	align-items: flex-end;*/
+	justify-content: center;
+	align-items: center;
 	flex-direction: column;
-	/*background-color: black;*/
-	margin: 5px 20px 5px 20px;
+	margin: 8px 30px 8px 30px;
 	height: 506px;
+	width: 160px;
 }
 
 #shape-grid {
@@ -175,6 +175,10 @@ h1 {
 }
 
 #player-stage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	margin-bottom: 20px;
 	font-family: Verdana, sans-serif;
 	padding: 0.1em 0.3em 0.1em 0.3em;
@@ -184,6 +188,10 @@ h1 {
 }
 
 #player-line {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	margin-bottom: 20px;
 	font-family: Verdana, sans-serif;
 	padding: 0.1em 0.3em 0.1em 0.3em;
@@ -193,6 +201,10 @@ h1 {
 }
 
 #player-score {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	margin-bottom: 20px;
 	font-family: Verdana, sans-serif;
 	padding: 0.1em 0.3em 0.1em 0.3em;
