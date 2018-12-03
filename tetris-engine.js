@@ -3,15 +3,12 @@
 function setScenario(string) {
   switch(string) {
     case "startScenario":
-      console.log("Сценарий приветствия запущен");
       startScene();
       break;
     case "gameScenario":
-      console.log("Сценарий игры запущен");
       gameScene();
       break;
     case "resultScenario":
-      console.log("Сценарий статистики запущен");
       resultScene();
       break;
     default:
@@ -105,11 +102,11 @@ var timeSpeed,
     canPlay = true;
 
 function restAllKeys() {
-  timeSpeed = 700,
-  totalScore = 0,
-  totalStage = 0,
-  totalLine = 0,
-  gameMotion = 0,
+  timeSpeed = 700;
+  totalScore = 0;
+  totalStage = 0;
+  totalLine = 0;
+  gameMotion = 0;
   canPlay = true;
 };
 
@@ -751,6 +748,7 @@ function resultScene() {
     clearWorld();
     setScenario("gameScenario");
     playSound("introMusic");
+
   }
 };
 
