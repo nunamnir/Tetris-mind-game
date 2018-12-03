@@ -105,7 +105,7 @@ var timeSpeed,
     canPlay = true;
 
 function restAllKeys() {
-  timeSpeed = 750,
+  timeSpeed = 700,
   totalScore = 0,
   totalStage = 0,
   totalLine = 0,
@@ -556,7 +556,7 @@ function checkLines() {
       totalScore += 60;
       totalLine++;
       $("#line").text(totalLine);
-      $("#score").text(totalScore);          
+      $("#score").text(totalScore);        
 		}
 	}
 };
