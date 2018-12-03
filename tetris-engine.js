@@ -43,7 +43,6 @@ function playSound(string) {
       break;
 
     case "moveDown":
-      // console.log("wdaw");
       var moveDown;
       if(canPlay) {
         canPlay = false;
@@ -58,7 +57,6 @@ function playSound(string) {
       break;
 
     case "moveShape":
-      // console.log("wdaw");
       var moveShape;
       if(canPlay) {
         canPlay = false;
@@ -91,7 +89,7 @@ function playSound(string) {
       clearLine.src = "sound/clearline.mp3";
       clearLine.volume = 1.0;
       clearLine.play();
-      break;   
+      break;  
 
     default: return;
   }
@@ -111,11 +109,12 @@ function restAllKeys() {
   totalScore = 0,
   totalStage = 0,
   totalLine = 0,
-  gameMotion = 0;
+  gameMotion = 0,
+  canPlay = true;
 };
 
 var shapeKeys = [
-  /*Фигура 1: зигзаг*/
+  /*figure 1*/
   {
     rotation: 0,
     data: [
@@ -140,7 +139,7 @@ var shapeKeys = [
     ]
   },
 
-  /* Фигура 2: квадрат*/
+  /*figure 2*/
   {
   	rotation: 0,
    	data: [
@@ -163,7 +162,7 @@ var shapeKeys = [
     ]
   },
 
-  /* Фигура 3: палка */
+  /*figure 3*/
   {
   	rotation: 0,
   	data: [
@@ -188,7 +187,7 @@ var shapeKeys = [
     ]
   },
 
-  /*figure4*/
+  /*figure 4*/
   {
   	rotation: 0,
   	data: [
@@ -212,7 +211,7 @@ var shapeKeys = [
       ],
     ]
   },
-  /*figure5*/
+  /*figure 5*/
   {
   	rotation: 0,
   	data: [
@@ -236,7 +235,7 @@ var shapeKeys = [
       ],
     ]
   },
-  /*figure6*/
+  /*figure 6*/
   {
   	rotation: 0,
   	data: [
@@ -260,7 +259,7 @@ var shapeKeys = [
       ],
     ]
   }, 
-  /*figure7*/
+  /*figure 7*/
   {
   	rotation: 0,
   	data: [
@@ -403,7 +402,6 @@ function putNextShape() {
   }
   drawWorld();
 };
-
 
 function getRandom (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -691,7 +689,6 @@ function startScene() {
   };
 
   function startEnter(event) {
-    // console.log(event);
     if(event.key == "Enter") {
       $("html").off("keydown", startEnter);
       clearInterval(showInterval);
@@ -708,6 +705,9 @@ function gameScene() {
   $("#result-scene").css("display", "none");
 
   restAllKeys();
+  $("#stage").text(totalStage); 
+  $("#line").text(totalLine);
+  $("#score").text(totalScore);
 
   $("html").keydown(function(event) {
     switch(event.key) {
