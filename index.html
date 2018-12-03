@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tetris on JavaScript</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="tetris-style.css">	
+	<link rel="stylesheet" type="text/css" href="fontello/css/fontello.css">
+</head>
+<body>
+	<article id="start-scene">
+		<header id="artists">
+			<span class="icon-eye">Victor Hunko</span>
+			<span class="icon-user">Oleg Savluchenko</span>
+			<span class="icon-globe">2018</span>
+		</header>
+		<h1>
+			Тетрис
+		</h1>
+		<p id="story">
+			Те́трис (производное от «тетрамино» и «теннис») — компьютерная игра, первоначально изобретённая и разработанная советским программистом Алексеем Пажитновым. Игра была выпущена 6 июня 1984 года — в это время Пажитнов работал в Вычислительном центре Академии наук СССР.
+			<br><br>
+			«Тетрис» представляет собой головоломку, построенную на использовании геометрических фигур «тетрамино» — разновидности полимино, состоящих из четырёх квадратов. Полимино в том или ином виде использовались в настольных играх и головоломках задолго до создания «Тетриса». Идею «Тетриса» Пажитнову подсказала игра в пентамино. Первоначальная версия игры была написана Пажитновым на языке Паскаль для компьютера «Электроника-60». Коммерческая версия игры — первая из многих последующих — была выпущена американской компанией Spectrum HoloByte (англ.)русск. в 1987 году. В последующие годы «Тетрис» во множестве различных версий был портирован на великое множество устройств, включая все возможные компьютеры и игровые консоли, а также такие устройства, как графические калькуляторы, мобильные телефоны, медиа-плееры, КПК и — в качестве «пасхального яйца» — устройства, вовсе не предназначенные для воспроизведения медиа-контента, такие, как осциллографы.
+		</p>
+		<div id="press-start">
+			Нажмите клавишу Enter
+		</div>
+		<footer id="tools">
+			<div class="tools-wrap">
+				<img id="html" src="img/tools/html-logo.png" alt="">
+				<span>HTML</span>			
+			</div>
+			<div class="tools-wrap">
+				<img id="css" src="img/tools/css-logo.png" alt="">
+				<span>CSS</span>
+			</div>
+			<div class="tools-wrap">
+				<img id="js" src="img/tools/js-logo.png" alt="">
+				<span>JavaScript</span>
+			</div>
+			<div class="tools-wrap">	
+				<img id="jq" src="img/tools/jquery-logo.png" alt="">
+				<span>jQuery</span>
+			</div>
+		</footer>
+	</article>	
+	<!-- Инициализируем ячейки --> 
+	<main id="game-scene">
+		<header id="artists">
+			<span class="icon-eye">Victor Hunko</span>
+			<span class="icon-user">Oleg Savluchenko</span>
+			<span class="icon-globe">2018</span>
+		</header>
+		<div id="world-box">	
+			<div id="world">
+				<div id="status-bar">
+					<div id="shape-grid">
+						<div class="row_line">
+							<div id="line-0-cell-0"></div>
+							<div id="line-0-cell-1"></div>
+							<div id="line-0-cell-2"></div>
+							<div id="line-0-cell-3"></div>
+						</div>
+						<div class="row_line">
+							<div id="line-1-cell-0"></div>
+							<div id="line-1-cell-1"></div>
+							<div id="line-1-cell-2"></div>
+							<div id="line-1-cell-3"></div>
+						</div>
+					</div>
+					<div id="player-stage">
+						Stage: 
+						<span id="stage">
+							0
+						</span>
+					</div>
+					<div id="player-line">
+						Lines: 
+						<span id="line">
+							0
+						</span>
+					</div>
+					<div id="player-score">
+						Score: 
+						<span id="score">
+							0
+						</span>
+					</div>
+				</div>
+				<div id="board">
+					<div id="result-scene">
+						<div id="result">Вы проиграли</div>
+						<button id="restart-button">
+							<span id="restart-text">
+								Сыграть еще раз
+							</span>
+						</button>
+					</div>
+					<div class="row_line">
+						<div id="row-0-col-0"></div>
+						<div id="row-0-col-1"></div>
+						<div id="row-0-col-2"></div>
+						<div id="row-0-col-3"></div>
+						<div id="row-0-col-4"></div>
+						<div id="row-0-col-5"></div>
+						<div id="row-0-col-6"></div>
+						<div id="row-0-col-7"></div>
+						<div id="row-0-col-8"></div>
+						<div id="row-0-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-1-col-0"></div>
+						<div id="row-1-col-1"></div>
+						<div id="row-1-col-2"></div>
+						<div id="row-1-col-3"></div>
+						<div id="row-1-col-4"></div>
+						<div id="row-1-col-5"></div>
+						<div id="row-1-col-6"></div>
+						<div id="row-1-col-7"></div>
+						<div id="row-1-col-8"></div>
+						<div id="row-1-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-2-col-0"></div>
+						<div id="row-2-col-1"></div>
+						<div id="row-2-col-2"></div>
+						<div id="row-2-col-3"></div>
+						<div id="row-2-col-4"></div>
+						<div id="row-2-col-5"></div>
+						<div id="row-2-col-6"></div>
+						<div id="row-2-col-7"></div>
+						<div id="row-2-col-8"></div>
+						<div id="row-2-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-3-col-0"></div>
+						<div id="row-3-col-1"></div>
+						<div id="row-3-col-2"></div>
+						<div id="row-3-col-3"></div>
+						<div id="row-3-col-4"></div>
+						<div id="row-3-col-5"></div>
+						<div id="row-3-col-6"></div>
+						<div id="row-3-col-7"></div>
+						<div id="row-3-col-8"></div>
+						<div id="row-3-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-4-col-0"></div>
+						<div id="row-4-col-1"></div>
+						<div id="row-4-col-2"></div>
+						<div id="row-4-col-3"></div>
+						<div id="row-4-col-4"></div>
+						<div id="row-4-col-5"></div>
+						<div id="row-4-col-6"></div>
+						<div id="row-4-col-7"></div>
+						<div id="row-4-col-8"></div>
+						<div id="row-4-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-5-col-0"></div>
+						<div id="row-5-col-1"></div>
+						<div id="row-5-col-2"></div>
+						<div id="row-5-col-3"></div>
+						<div id="row-5-col-4"></div>
+						<div id="row-5-col-5"></div>
+						<div id="row-5-col-6"></div>
+						<div id="row-5-col-7"></div>
+						<div id="row-5-col-8"></div>
+						<div id="row-5-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-6-col-0"></div>
+						<div id="row-6-col-1"></div>
+						<div id="row-6-col-2"></div>
+						<div id="row-6-col-3"></div>
+						<div id="row-6-col-4"></div>
+						<div id="row-6-col-5"></div>
+						<div id="row-6-col-6"></div>
+						<div id="row-6-col-7"></div>
+						<div id="row-6-col-8"></div>
+						<div id="row-6-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-7-col-0"></div>
+						<div id="row-7-col-1"></div>
+						<div id="row-7-col-2"></div>
+						<div id="row-7-col-3"></div>
+						<div id="row-7-col-4"></div>
+						<div id="row-7-col-5"></div>
+						<div id="row-7-col-6"></div>
+						<div id="row-7-col-7"></div>
+						<div id="row-7-col-8"></div>
+						<div id="row-7-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-8-col-0"></div>
+						<div id="row-8-col-1"></div>
+						<div id="row-8-col-2"></div>
+						<div id="row-8-col-3"></div>
+						<div id="row-8-col-4"></div>
+						<div id="row-8-col-5"></div>
+						<div id="row-8-col-6"></div>
+						<div id="row-8-col-7"></div>
+						<div id="row-8-col-8"></div>
+						<div id="row-8-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-9-col-0"></div>
+						<div id="row-9-col-1"></div>
+						<div id="row-9-col-2"></div>
+						<div id="row-9-col-3"></div>
+						<div id="row-9-col-4"></div>
+						<div id="row-9-col-5"></div>
+						<div id="row-9-col-6"></div>
+						<div id="row-9-col-7"></div>
+						<div id="row-9-col-8"></div>
+						<div id="row-9-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-10-col-0"></div>
+						<div id="row-10-col-1"></div>
+						<div id="row-10-col-2"></div>
+						<div id="row-10-col-3"></div>
+						<div id="row-10-col-4"></div>
+						<div id="row-10-col-5"></div>
+						<div id="row-10-col-6"></div>
+						<div id="row-10-col-7"></div>
+						<div id="row-10-col-8"></div>
+						<div id="row-10-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-11-col-0"></div>
+						<div id="row-11-col-1"></div>
+						<div id="row-11-col-2"></div>
+						<div id="row-11-col-3"></div>
+						<div id="row-11-col-4"></div>
+						<div id="row-11-col-5"></div>
+						<div id="row-11-col-6"></div>
+						<div id="row-11-col-7"></div>
+						<div id="row-11-col-8"></div>
+						<div id="row-11-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-12-col-0"></div>
+						<div id="row-12-col-1"></div>
+						<div id="row-12-col-2"></div>
+						<div id="row-12-col-3"></div>
+						<div id="row-12-col-4"></div>
+						<div id="row-12-col-5"></div>
+						<div id="row-12-col-6"></div>
+						<div id="row-12-col-7"></div>
+						<div id="row-12-col-8"></div>
+						<div id="row-12-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-13-col-0"></div>
+						<div id="row-13-col-1"></div>
+						<div id="row-13-col-2"></div>
+						<div id="row-13-col-3"></div>
+						<div id="row-13-col-4"></div>
+						<div id="row-13-col-5"></div>
+						<div id="row-13-col-6"></div>
+						<div id="row-13-col-7"></div>
+						<div id="row-13-col-8"></div>
+						<div id="row-13-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-14-col-0"></div>
+						<div id="row-14-col-1"></div>
+						<div id="row-14-col-2"></div>
+						<div id="row-14-col-3"></div>
+						<div id="row-14-col-4"></div>
+						<div id="row-14-col-5"></div>
+						<div id="row-14-col-6"></div>
+						<div id="row-14-col-7"></div>
+						<div id="row-14-col-8"></div>
+						<div id="row-14-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-15-col-0"></div>
+						<div id="row-15-col-1"></div>
+						<div id="row-15-col-2"></div>
+						<div id="row-15-col-3"></div>
+						<div id="row-15-col-4"></div>
+						<div id="row-15-col-5"></div>
+						<div id="row-15-col-6"></div>
+						<div id="row-15-col-7"></div>
+						<div id="row-15-col-8"></div>
+						<div id="row-15-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-16-col-0"></div>
+						<div id="row-16-col-1"></div>
+						<div id="row-16-col-2"></div>
+						<div id="row-16-col-3"></div>
+						<div id="row-16-col-4"></div>
+						<div id="row-16-col-5"></div>
+						<div id="row-16-col-6"></div>
+						<div id="row-16-col-7"></div>
+						<div id="row-16-col-8"></div>
+						<div id="row-16-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-17-col-0"></div>
+						<div id="row-17-col-1"></div>
+						<div id="row-17-col-2"></div>
+						<div id="row-17-col-3"></div>
+						<div id="row-17-col-4"></div>
+						<div id="row-17-col-5"></div>
+						<div id="row-17-col-6"></div>
+						<div id="row-17-col-7"></div>
+						<div id="row-17-col-8"></div>
+						<div id="row-17-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-18-col-0"></div>
+						<div id="row-18-col-1"></div>
+						<div id="row-18-col-2"></div>
+						<div id="row-18-col-3"></div>
+						<div id="row-18-col-4"></div>
+						<div id="row-18-col-5"></div>
+						<div id="row-18-col-6"></div>
+						<div id="row-18-col-7"></div>
+						<div id="row-18-col-8"></div>
+						<div id="row-18-col-9"></div>
+					</div>
+					<div class="row_line">
+						<div id="row-19-col-0"></div>
+						<div id="row-19-col-1"></div>
+						<div id="row-19-col-2"></div>
+						<div id="row-19-col-3"></div>
+						<div id="row-19-col-4"></div>
+						<div id="row-19-col-5"></div>
+						<div id="row-19-col-6"></div>
+						<div id="row-19-col-7"></div>
+						<div id="row-19-col-8"></div>
+						<div id="row-19-col-9"></div>
+					</div>
+				</div> <!-- конец board -->
+			</div>
+		</div>
+		<footer id="tools">
+			<div class="tools-wrap">
+				<img id="html" src="img/tools/html-logo.png" alt="">
+				<span>HTML</span>			
+			</div>
+			<div class="tools-wrap">
+				<img id="css" src="img/tools/css-logo.png" alt="">
+				<span>CSS</span>
+			</div>
+			<div class="tools-wrap">
+				<img id="js" src="img/tools/js-logo.png" alt="">
+				<span>JavaScript</span>
+			</div>
+			<div class="tools-wrap">	
+				<img id="jq" src="img/tools/jquery-logo.png" alt="">
+				<span>jQuery</span>
+			</div>
+		</footer> 
+	</main> <!-- конец game-world -->
+	<script src="tetris-engine.js"></script>
+</body>
+</html>
