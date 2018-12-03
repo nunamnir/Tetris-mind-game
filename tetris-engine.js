@@ -20,7 +20,7 @@ function setScenario(string) {
   }
 };
 
-// звуки
+// музыка
 function playMusic(string) {
   switch(string) {    
     case "bgMusic":
@@ -114,7 +114,7 @@ function restAllKeys() {
 };
 
 var shapeKeys = [
-  /*figure 1*/
+  /*Фигура 1*/
   {
     rotation: 0,
     data: [
@@ -139,7 +139,7 @@ var shapeKeys = [
     ]
   },
 
-  /*figure 2*/
+  /*Фигура 2*/
   {
   	rotation: 0,
    	data: [
@@ -162,7 +162,7 @@ var shapeKeys = [
     ]
   },
 
-  /*figure 3*/
+  /*Фигура 3*/
   {
   	rotation: 0,
   	data: [
@@ -187,7 +187,7 @@ var shapeKeys = [
     ]
   },
 
-  /*figure 4*/
+  /*Фигура 4*/
   {
   	rotation: 0,
   	data: [
@@ -211,7 +211,7 @@ var shapeKeys = [
       ],
     ]
   },
-  /*figure 5*/
+  /*Фигура 5*/
   {
   	rotation: 0,
   	data: [
@@ -235,7 +235,7 @@ var shapeKeys = [
       ],
     ]
   },
-  /*figure 6*/
+  /*Фигура 6*/
   {
   	rotation: 0,
   	data: [
@@ -259,7 +259,7 @@ var shapeKeys = [
       ],
     ]
   }, 
-  /*figure 7*/
+  /*Фигура 7*/
   {
   	rotation: 0,
   	data: [
@@ -669,7 +669,6 @@ function gameLoop() {
 };
 
 function startScene() {
-  // playSound();
   $("#start-scene").css("display", "flex");
   $("#game-scene").css("display", "none");
   $("#result-scene").css("display", "none");
