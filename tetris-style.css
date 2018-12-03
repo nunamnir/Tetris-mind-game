@@ -134,7 +134,7 @@ h1 {
 }
 
 #game-scene {
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	position: relative;
@@ -200,22 +200,6 @@ h1 {
 	font-size: 18px;
 	color: white;
 }
-
-/*#line {
-	font-family: Verdana, sans-serif;
-	padding: 0.1em 0.3em 0.1em 0.3em;
-	text-shadow: 1px 1px 1px black, 0 0 0.1em black;
-	font-size: 18px;
-	color: gold;		
-}
-
-#score {
-	font-family: Verdana, sans-serif;
-	padding: 0.1em 0.3em 0.1em 0.3em;
-	text-shadow: 1px 1px 1px black, 0 0 0.1em black;
-	font-size: 18px;
-	color: gold;
-}*/
 
 #board {	
 	display: flex;
