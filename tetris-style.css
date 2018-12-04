@@ -321,6 +321,7 @@ h1 {
 	height: 506px;
 	width: 256px;
 	background-color: rgba(255, 255, 255, 0.6);
+	border: 3px solid rgba(0, 0, 0, 1.0);
 	z-index: 5;
 }
 
