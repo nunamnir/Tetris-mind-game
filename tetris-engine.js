@@ -553,7 +553,7 @@ function checkLines() {
       totalScore += 60;
       totalLine++;
       $("#line").text(totalLine);
-      $("#score").text(totalScore);        
+      $("#score").text(totalScore);
 		}
 	}
 };
@@ -660,6 +660,13 @@ function gameLoop() {
       break; 
   };  
   $("#stage").text(totalStage);
+  // зациклить фоновую музыку
+  if(bgMusic.duration === bgMusic.currentTime) {
+    bgMusic.currentTime = 0.0;
+    setTimeout(function() {     
+      playMusic("bgMusic");
+    }, 3000);    
+  }
   drawWorld();
   moveDown();
   gameMotion = setTimeout(gameLoop, timeSpeed);
