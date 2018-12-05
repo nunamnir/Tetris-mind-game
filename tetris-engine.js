@@ -106,7 +106,7 @@ function restAllKeys() {
   totalScore = 0;
   totalStage = 0;
   totalLine = 0;
-  gameMotion = 0;
+  // gameMotion = 0;
   canPlay = true;
 };
 
@@ -660,15 +660,18 @@ function gameLoop() {
       break; 
   };  
   $("#stage").text(totalStage);
+
+  console.log("drawWorld...");
   // зациклить фоновую музыку
   if(bgMusic.duration === bgMusic.currentTime) {
     bgMusic.currentTime = 0.0;
     setTimeout(function() {     
       playMusic("bgMusic");
-    }, 3000);    
+    }, 3000);   
   }
   drawWorld();
   moveDown();
+  console.log("timeSpeed: " + timeSpeed);
   gameMotion = setTimeout(gameLoop, timeSpeed);
 };
 
@@ -773,7 +776,6 @@ function clearWorld() {
 };
 
 function gameInit() {
-  drawWorld();
   putFirstShape();
   createNextShape();
   gameLoop();
