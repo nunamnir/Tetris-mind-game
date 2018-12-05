@@ -326,6 +326,7 @@ var world = [
 
 function drawWorld() {
 	$.each(world, function(row_index, col) {
+    // console.log("row_index: " + row_index);
 		$.each(col, function(col_index, value) {			
 			var selector = "#row-" + row_index + "-col-" + col_index;
 			$(selector).removeClass();
@@ -365,6 +366,7 @@ function putFirstShape() {
       world[curShape.y + y][curShape.x + x] = curShape.data[0][y][x];
     }
   }
+  drawWorld();
 };
 
 // загрузка следующей фигуры
@@ -396,6 +398,7 @@ function putNextShape() {
       world[curShape.y + y][curShape.x + x] = curShape.data[0][y][x];
     }
   }
+  drawWorld();
 };
 
 function getRandom (min, max) {
