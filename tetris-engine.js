@@ -365,7 +365,6 @@ function putFirstShape() {
       world[curShape.y + y][curShape.x + x] = curShape.data[0][y][x];
     }
   }
-  drawWorld();
 };
 
 // загрузка следующей фигуры
@@ -397,7 +396,6 @@ function putNextShape() {
       world[curShape.y + y][curShape.x + x] = curShape.data[0][y][x];
     }
   }
-  drawWorld();
 };
 
 function getRandom (min, max) {
@@ -412,7 +410,7 @@ function moveDown() {
         if(y === world.length-1 || world[y+1][x] > 10) {
           canMove = false;
           freeze();
-          if(world[0][x] == 11) {
+          if(world[1][x] == 11) {
               resultScene();
           } else {           
             putNextShape();
@@ -610,57 +608,73 @@ function turnShape() {
   };
 };
 
-function gameLoop() {
-  switch(totalScore) {
-    case 0:
-      timeSpeed = 700;
-      totalStage = 1;
-      break;
-    case 60:
-      timeSpeed = 650;
-      totalStage = 2;
-      break;
-    case 180:
-      timeSpeed = 600;
-      totalStage = 3;
-      break;
-    case 300:
-      timeSpeed = 550;
-      totalStage = 4;
-      break;
-    case 420:
-      timeSpeed = 500;
-      totalStage = 5;
-      break;
-    case 600:
-      timeSpeed = 450;
-      totalStage = 6;
-      break;
-    case 900:
-      timeSpeed = 400;
-      totalStage = 7;
-      break;
-    case 1200:
-      timeSpeed = 350;
-      totalStage = 8;
-      break;
-    case 1500:
-      timeSpeed = 300;
-      totalStage = 9;
-      break;
-    case 1800:
-      timeSpeed = 250;
-      totalStage = 10;
-      break;
-    case 2400:
-      timeSpeed = 200;
-      totalStage = 11;
-      break;                                                  
-    default:
-      break; 
-  };  
-  $("#stage").text(totalStage);
+function checkGameSpeed() {
+  console.log("totalScore: " + totalScore);
+  if(totalScore == 0) {    
+    timeSpeed = 700;
+    totalStage = 1;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 60) {
+    timeSpeed = 650;
+    totalStage = 2;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 180) {
+    timeSpeed = 600;
+    totalStage = 3;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 300) {
+    timeSpeed = 550;
+    totalStage = 4;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 420) {
+    timeSpeed = 500;
+    totalStage = 5;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 600) {
+    timeSpeed = 450;
+    totalStage = 6;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 900) {
+    timeSpeed = 400;
+    totalStage = 7;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 1200) {
+    timeSpeed = 350;
+    totalStage = 8;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 1500) {
+    timeSpeed = 300;
+    totalStage = 9;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 1800) {
+    timeSpeed = 250;
+    totalStage = 10;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 2400) {
+    timeSpeed = 200;
+    totalStage = 11;
+    console.log("Stage: " + totalStage);
+  }
+  if(totalScore >= 3000) {
+    timeSpeed = 150;
+    totalStage = 12;
+    console.log("Stage: " + totalStage);
+  } else return;
+};
 
+function gameLoop() {
+  checkGameSpeed();  
+  $("#stage").text(totalStage);
   console.log("drawWorld...");
   // зациклить фоновую музыку
   if(bgMusic.duration === bgMusic.currentTime) {
